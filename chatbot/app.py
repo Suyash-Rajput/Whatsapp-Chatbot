@@ -11,7 +11,13 @@ def wa_reply():
     print("User query: %s" % query)
     generate_ans = gemini.get_gemini_response(query)
     wa_api = API_Whatsapp()
-    response = wa_api.message_2(generate_ans)
+    if len(generate_ans) > 1600:
+        chunks = [generate_ans[i:i+1600] for i in range(0, len(generate_ans), 1600)]
+        for chunk in chunks:
+            response = wa_api.message_2(chunk)
+    else:
+        response = wa_api.message_2(generate_ans)
+    
     return str(response.body)
 
 if __name__ == "__main__":

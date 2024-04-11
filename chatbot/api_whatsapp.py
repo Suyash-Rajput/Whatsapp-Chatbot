@@ -1,9 +1,8 @@
 from twilio.rest import Client
 
-account_sid = 'ACaf472b38e2ea546ab4f0cd042a02471b'
-auth_token = 'd794f3d0e011bd2c76127b68a9980028'
-client = Client(account_sid, auth_token)
-
+# account_sid = 'ACaf472b38e2ea546ab4f0cd042a02471b'
+# auth_token = 'd794f3d0e011bd2c76127b68a9980028'
+# client = Client(account_sid, auth_token)
 
 
 class API_Whatsapp():
