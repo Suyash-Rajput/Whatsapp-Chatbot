@@ -25,14 +25,14 @@
 - `app.py` is the Flask API which handles Request/Response of ChatBOT.
 - To run this script follow this command.
   ``` 
-    python3 app.py
+     app.py
   ```
 
 - For more explanation of this project see the tutorial on Machine Learning Hub YouTube channel.
 
 ## Screenshot of Chatbot
 
-<img src="https://github.com/Spidy20/Chatbot/sc_1.jpg" width="270" height="500">
+<img src="https://github.com/Suyash-Rajput/Chatbot/blob/main/sc_1.jpg" width="270" height="500">
 
 
 ## Just follow☝️ me and Star⭐ my repository 
