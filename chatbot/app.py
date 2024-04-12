@@ -15,7 +15,8 @@ csv_file_path = "F:\Chatbot\chatbot.csv"
 
 def the_final_prompt(message):
     s1 = "Based on the message given to you, create a new question.\n"
-    s1 += f"Message: {message}"
+    s1 += f"Message: {message} \n"
+    s1 + " Modify the Message in a best way \n"
     return s1
 
 def read_csv(file_path):
@@ -42,6 +43,9 @@ def wa_reply():
     counter = 0
     generate_ans = ""
     time_diff = 12
+    # del session['counter']
+    # del session['To']
+    # del session['time_started']    
     csv_data = read_csv(csv_file_path)
     recipient_number = request.form.get('To')
     session_started_time = session.get('time_started', None)
@@ -49,7 +53,7 @@ def wa_reply():
     if session_started_time is not None:
         time_diff = print_time_taken(session['time_started'], datetime.now())
     
-    if 'To' in session and session['To'] == recipient_number and time_diff < 10 and session.get('counter', 0) < len(csv_data[0]):
+    if 'To' in session and session['To'] == recipient_number and time_diff < 10 and session.get('counter', 0) <= len(csv_data[0]):
         print("Is present ------------", session['counter'])
         counter = session['counter']
     else:
