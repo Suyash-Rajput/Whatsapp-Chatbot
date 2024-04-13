@@ -2,7 +2,7 @@
 ## Backend is Deployed at this URL :-  https://chatbot-izuy.onrender.com/whatsapp
 - Apply this URL at Sandbox POST request :- 
 
-<img src="https://github.com/Suyash-Rajput/Chatbot/blob/main/sandbox.png" width="270" height="500">
+<img src="https://github.com/Suyash-Rajput/Chatbot/blob/main/sandbox.png" width="500" height="500">
 
 ## We have used:
 - Ngrok and Flask as a server.
