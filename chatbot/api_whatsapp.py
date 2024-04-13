@@ -13,8 +13,8 @@ class API_Whatsapp():
     self.auth_token = 'f020ab52ba467fb753e24a9398e2dee6'
     self.client = Client(self.account_sid, self.auth_token)
     
-    self.from_phone = "whatsapp:+14155238886"
-    self.to_phone = "whatsapp:+919305574955"
+    # self.from_phone = "whatsapp:+14155238886"
+    # self.to_phone = "whatsapp:+919793186846"
   
   
   

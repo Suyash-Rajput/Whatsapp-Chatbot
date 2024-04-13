@@ -8,8 +8,7 @@ import gemini
 from datetime import datetime, timezone
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Set a secret key for session management
-
+app.secret_key = 'your_secret_key'  
 # Global variables
 csv_file_path = "F:\Chatbot\chatbot.csv"
 
@@ -47,7 +46,8 @@ def wa_reply():
     # del session['To']
     # del session['time_started']    
     csv_data = read_csv(csv_file_path)
-    recipient_number = request.form.get('To')
+    recipient_number = request.form.get('From')
+    print(recipient_number)
     session_started_time = session.get('time_started', None)
     
     if session_started_time is not None:
@@ -74,7 +74,8 @@ def wa_reply():
         generate_ans = gemini.get_gemini_response(final_prompt)
     
     wa_api = API_Whatsapp()
-    
+    wa_api.from_phone = request.form.get('To')
+    wa_api.to_phone =  recipient_number
     if len(generate_ans) > 1600:
         chunks = [generate_ans[i:i+1600] for i in range(0, len(generate_ans), 1600)]
         for chunk in chunks:
