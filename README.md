@@ -1,5 +1,5 @@
 # Create WhatApp Chatbot💬 using Google Gemini and Flask
-
+## Backend is Deployed at this URL :-  https://chatbot-izuy.onrender.com/whatsapp
 ## We have used:
 - Ngrok and Flask as a server.
 - Twilio as whatsapp agent.
@@ -12,7 +12,8 @@
 3. Create Flask App.
 4. Run Ngrok on same port as Flask App. 
 5. Setup Ngrok URL in Whatsapp Sandbox (in Twilio console).
-6. Done, chatbot is activated!!
+6. Deploy the Flask App at server  like I did (https://chatbot-izuy.onrender.com/whatsapp) 
+6 . Done, chatbot is activated!!
 
 ## Usage:
 - Clone my repository.
