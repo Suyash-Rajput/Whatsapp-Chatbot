@@ -1,16 +1,21 @@
 import os
 import csv
+import gemini
+from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
 from model import Message
 from flask_sqlalchemy import SQLAlchemy
-import gemini
 from datetime import datetime, timezone
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  
 # Global variables
-csv_file_path = "F:\Chatbot\chatbot.csv"
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+csv_file_path = os.path.join( BASE_DIR, 'chatbot.csv')
 
 def the_final_prompt(message):
     s1 = "Based on the message given to you, create a new question.\n"
