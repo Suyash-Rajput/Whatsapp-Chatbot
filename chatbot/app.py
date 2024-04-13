@@ -13,9 +13,9 @@ app.secret_key = 'your_secret_key'
 # Global variables
 
 BASE_DIR = Path(__file__).resolve().parent
+parent_dir = os.path.dirname(BASE_DIR)
 
-
-csv_file_path = os.path.join( BASE_DIR, 'chatbot.csv')
+csv_file_path = os.path.join( parent_dir, 'chatbot.csv')
 
 def the_final_prompt(message):
     s1 = "Based on the message given to you, create a new question.\n"
