@@ -4,17 +4,21 @@ import gemini
 from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
+from Bigquery import GCP_big_query
 from model import Message
 from flask_sqlalchemy import SQLAlchemy
 from google.cloud import bigquery
 from datetime import datetime, timezone
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  
+app.secret_key = 'your_secret_key'
+gcp = GCP_big_query()  
+wa_api = API_Whatsapp()
 # Global variables
 
 BASE_DIR = Path(__file__).resolve().parent
 parent_dir = os.path.dirname(BASE_DIR)
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] =  os.path.join(parent_dir, 'autotask-loreal-dv-dd0494ce10d7.json')
 
 csv_file_path = os.path.join( parent_dir, 'chatbot.csv')
 
@@ -59,9 +63,8 @@ def wa_reply():
     counter = 0
     generate_ans = ""
     time_diff = 12
-    # del session['counter']
-    # del session['To']
-    # del session['time_started']    
+    gcp.create_dataset("Chatbot_messages_dataset")
+    gcp.create_table("chatbot_messages", "Chatbot_messages_dataset")   
     csv_data = read_csv(csv_file_path)
     recipient_number = request.form.get('From')
     print(recipient_number)
@@ -90,7 +93,6 @@ def wa_reply():
         print("final _prompt: " + final_prompt)
         generate_ans = gemini.get_gemini_response(final_prompt)
     
-    wa_api = API_Whatsapp()
     wa_api.from_phone = request.form.get('To')
     wa_api.to_phone =  recipient_number
     
