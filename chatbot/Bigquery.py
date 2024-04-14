@@ -26,4 +26,4 @@ def delete_dataset():
     return
 
 def delete_table():
-    
+    return
