@@ -5,20 +5,18 @@ from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
 from Bigquery import GCP_big_query
-from flask_sqlalchemy import SQLAlchemy
-from google.cloud import bigquery
 from datetime import datetime, timezone
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-gcp = GCP_big_query()  
-wa_api = API_Whatsapp()
 # Global variables
 
 BASE_DIR = Path(__file__).resolve().parent
 parent_dir = os.path.dirname(BASE_DIR)
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] =  os.path.join(parent_dir, 'autotask-loreal-dv-dd0494ce10d7.json')
-
+gcp = GCP_big_query()  
+wa_api = API_Whatsapp()
 csv_file_path = os.path.join( parent_dir, 'chatbot.csv')
 
 def the_final_prompt(message):
