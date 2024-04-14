@@ -93,6 +93,11 @@ def wa_reply():
     wa_api = API_Whatsapp()
     wa_api.from_phone = request.form.get('To')
     wa_api.to_phone =  recipient_number
+    
+    if query.strip().lower() ==  "reset":
+       response = wa_api.message_2("Session reset successfully.")
+       return str(response.body) 
+    
     if len(generate_ans) > 1600:
         chunks = [generate_ans[i:i+1600] for i in range(0, len(generate_ans), 1600)]
         for chunk in chunks:
