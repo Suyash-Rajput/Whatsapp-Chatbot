@@ -8,4 +8,22 @@ client = bigquery.Client()
 
 
 def create_dataset() :
-    f
+    return 
+
+def create_table():
+    return
+
+def insert_data():
+    return
+
+def update_data():
+    return
+
+def delete_data():
+    return
+
+def delete_dataset():
+    return
+
+def delete_table():
+    
