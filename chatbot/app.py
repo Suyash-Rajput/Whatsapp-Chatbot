@@ -5,7 +5,6 @@ from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
 from Bigquery import GCP_big_query
-from model import Message
 from flask_sqlalchemy import SQLAlchemy
 from google.cloud import bigquery
 from datetime import datetime, timezone
