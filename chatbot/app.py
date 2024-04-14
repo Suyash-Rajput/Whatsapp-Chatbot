@@ -6,6 +6,7 @@ from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
 from model import Message
 from flask_sqlalchemy import SQLAlchemy
+from google.cloud import bigquery
 from datetime import datetime, timezone
 
 app = Flask(__name__)
@@ -30,6 +31,17 @@ def read_csv(file_path):
          for row in reader:
              data.append(row)
     return data
+
+def read_from_bigquery():
+    query = """
+        SELECT *
+        FROM `your-project-id.your_dataset.your_table`
+    """
+    query_job = client.query(query)
+    results = query_job.result()
+    data = [dict(row) for row in results]
+    return data
+
 
 def print_time_taken(start_time, end_time):
     end_time_aware = end_time.replace(tzinfo=timezone.utc)
