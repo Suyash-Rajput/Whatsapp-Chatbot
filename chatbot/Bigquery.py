@@ -27,7 +27,7 @@ class  GCP_big_query():
     def create_table(self, table_id, dataset_id):
         dataset_ref = self.client.dataset(dataset_id)
         table_ref = dataset_ref.table(table_id)
-        table =  bigquery.Table(table_ref, scheme = self.scheme)
+        table =  bigquery.Table(table_ref, schema = self.schema)
         try:
             self.client.create_table(table)
             print(f"Table '{table_id}' created successfully.")
