@@ -11,9 +11,15 @@ class  GCP_big_query():
             bigquery.SchemaField("message_receiver", "STRING"),
             bigquery.SchemaField("message_time", "TIMESTAMP"),
             bigquery.SchemaField("message_text", "STRING"),
-            bigquery.SchemaField("inserted_time", "TIMESTAMP"),
         ]
-
+    
+    def get_existing_rows(self, table_id, dataset_id):
+        table_ref = self.client.dataset(dataset_id).table(table_id)
+        table = self.client.get_table(table_ref)
+        rows = self.client.list_rows(table)
+        row_count = sum(1 for row in rows)
+        return row_count
+         
     def create_dataset(self,dataset_id):
         dataset_ref = self.client.dataset(dataset_id)
         dataset = bigquery.Dataset(dataset_ref)
@@ -38,7 +44,7 @@ class  GCP_big_query():
     def insert_data(self, rows_to_insert, table_id, dataset_id):
         dataset_ref = self.client.dataset(dataset_id)
         table_ref = dataset_ref.table(table_id)
-        table =  bigquery.Table(table_ref, scheme = self.scheme)
+        table =  bigquery.Table(table_ref, schema = self.schema)
         self.client.insert_rows(table, rows_to_insert)
         print("Data inserted into the table.")
 

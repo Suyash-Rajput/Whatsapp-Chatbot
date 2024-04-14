@@ -15,6 +15,9 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(parent_dir, 'autotas
 
 gcp = GCP_big_query()
 wa_api = API_Whatsapp()
+dataset_id = "Chatbot_messages_dataset"
+table_id = "chatbot_messages"
+
 csv_file_path = os.path.join(parent_dir, 'chatbot.csv')
 
 def the_final_prompt(message):
@@ -42,16 +45,21 @@ def print_time_taken(start_time, end_time):
 
 @app.route('/whatsapp', methods=['POST'])
 def wa_reply():
+    current_time = datetime.now()
+    message_time = current_time.strftime("%b %d %Y, %I:%M %p")
     query = request.form.get('Body').lower()
     print("User query: %s" % query)
     counter = 0
     generate_ans = ""
     time_diff = 12
-    gcp.create_dataset("Chatbot_messages_dataset")
-    gcp.create_table("chatbot_messages", "Chatbot_messages_dataset")   
+    gcp.create_dataset(dataset_id)
+    gcp.create_table(table_id, dataset_id)   
     csv_data = read_csv(csv_file_path)
     recipient_number = request.form.get('From')
     print(recipient_number)
+    rows_present =  gcp.get_existing_rows(table_id, dataset_id)
+    rows_to_insert = [(str(rows_present+1), recipient_number, request.form.get('To'), message_time, query)]
+    gcp.insert_data(rows_to_insert, table_id, dataset_id)
     session_started_time = session.get('time_started', None)
 
     if session_started_time is not None:
@@ -84,6 +92,9 @@ def wa_reply():
     if query.strip().lower() == "reset":
         session.clear()  # Reset session data
         response = wa_api.message_2("Session reset successfully.")
+        message_time =  datetime.now().strftime("%b %d %Y, %I:%M %p")
+        rows_to_insert = [(str(rows_present+1), request.form.get('To'), recipient_number, message_time, response.body)] 
+        gcp.insert_data(rows_to_insert, table_id, dataset_id)
         return str(response.body)
 
     if len(generate_ans) > 1600:
@@ -92,7 +103,9 @@ def wa_reply():
             response = wa_api.message_2(chunk)
     else:
         response = wa_api.message_2(generate_ans)
-
+    message_time =  datetime.now().strftime("%b %d %Y, %I:%M %p")
+    rows_to_insert = [(str(rows_present+1), request.form.get('To'), recipient_number, message_time, response.body)] 
+    gcp.insert_data(rows_to_insert, table_id, dataset_id)
     return str(response.body)
 
 if __name__ == "__main__":
