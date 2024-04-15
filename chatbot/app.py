@@ -58,7 +58,7 @@ def wa_reply():
     recipient_number = request.form.get('From')
     print(recipient_number)
     rows_present =  gcp.get_existing_rows(table_id, dataset_id)
-    rows_to_insert = [(str(rows_present+1), recipient_number, request.form.get('To'), message_time, query)]
+    rows_to_insert = [{"id" :str(rows_present+1), "message_sender":  recipient_number, "message_receiver" : request.form.get('To'),"message_time": message_time,"message_text" : query}]
     gcp.insert_data(rows_to_insert, table_id, dataset_id)
     session_started_time = session.get('time_started', None)
 
@@ -93,7 +93,7 @@ def wa_reply():
         session.clear()  # Reset session data
         response = wa_api.message_2("Session reset successfully.")
         message_time =  datetime.now().strftime("%b %d %Y, %I:%M %p")
-        rows_to_insert = [(str(rows_present+1), request.form.get('To'), recipient_number, message_time, response.body)] 
+        rows_to_insert = [{"id" : str(rows_present+1), "message_sender":  recipient_number, "message_receiver" : request.form.get('To'),"message_time": message_time,"message_text" : query}]
         gcp.insert_data(rows_to_insert, table_id, dataset_id)
         return str(response.body)
 
@@ -104,7 +104,7 @@ def wa_reply():
     else:
         response = wa_api.message_2(generate_ans)
     message_time =  datetime.now().strftime("%b %d %Y, %I:%M %p")
-    rows_to_insert = [(str(rows_present+1), request.form.get('To'), recipient_number, message_time, response.body)] 
+    rows_to_insert = [{"id" :str(rows_present+1), "message_sender":  recipient_number, "message_receiver" : request.form.get('To'),"message_time": message_time,"message_text" : query}]
     gcp.insert_data(rows_to_insert, table_id, dataset_id)
     return str(response.body)
 
