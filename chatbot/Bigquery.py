@@ -6,7 +6,6 @@ class  GCP_big_query():
     def __init__(self):
         self.client = bigquery.Client()
         self.schema = [
-            bigquery.SchemaField("id", "INTEGER"),
             bigquery.SchemaField("message_sender", "STRING"),
             bigquery.SchemaField("message_receiver", "STRING"),
             bigquery.SchemaField("message_time", "TIMESTAMP"),
