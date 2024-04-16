@@ -20,6 +20,9 @@
         },
         "Invite": {
             "question": "Generate a new invitation on Google Meet and send it to the user."
+        },
+        "Feedback": {
+            "question": "Thanks for your response"
         }
     },
     "states": {
@@ -198,7 +201,8 @@
             },
             "outgoing": [
                 {
-                    "id": "S0"
+                    "id": "S0",
+                    "user_pref" : "Feedback"
                 }
             ]
         }
