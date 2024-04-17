@@ -4,6 +4,7 @@ from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
 from Bigquery import GCP_big_query
+import mcw.main_context_window as mcw
 from datetime import datetime, timezone
 
 app = Flask(__name__)
@@ -11,7 +12,7 @@ app.secret_key = 'your_secret_key'  # Set a secret key for session management
 
 BASE_DIR = Path(__file__).resolve().parent
 parent_dir = os.path.dirname(BASE_DIR)
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(parent_dir, 'json_files/autotask-loreal-dv-dd0494ce10d7.json')
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(parent_dir, 'autotask-loreal-dv-dd0494ce10d7.json')
 
 gcp = GCP_big_query()
 wa_api = API_Whatsapp()
@@ -39,7 +40,6 @@ def read_csv(file_path):
             data.append(row)
     return data
 
-    
 def print_time_taken(start_time, end_time):
     end_time_aware = end_time.replace(tzinfo=timezone.utc)
     duration = end_time_aware - start_time
@@ -48,6 +48,7 @@ def print_time_taken(start_time, end_time):
     seconds = round(total_time_seconds, 0)
     minutes = seconds // 60
     return minutes
+        
 
 @app.route('/whatsapp', methods=['POST'])
 def wa_reply():
@@ -55,11 +56,11 @@ def wa_reply():
     message_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
     query = request.form.get('Body').lower()
     print("User query: %s" % query)
+    update_context(session, query)
     counter = 0
     generate_ans = ""
     time_diff = 12
     gcp.create_dataset(dataset_id)
-    print(session)
     gcp.create_table(table_id, dataset_id)   
     csv_data = read_csv(csv_file_path)
     recipient_number = request.form.get('From')
@@ -70,6 +71,7 @@ def wa_reply():
 
     if session_started_time is not None:
         time_diff = print_time_taken(session['time_started'], datetime.now())
+
     if 'To' in session and session['To'] == recipient_number and time_diff < 10 and session.get('counter', 0) <= len(csv_data[0]):
         print("Is present ------------", session['counter'])
         counter = session['counter']
