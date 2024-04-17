@@ -1,0 +1,219 @@
+{
+    "config": {
+        "Name": {
+            "question" : "Ask the user to write its name."
+        },
+        "JOB-ID": {
+            "question": "Ask the user to choose the preferred job ID from the given list of job IDs."
+        },
+        "Current-Salary": {
+            "question": "Ask to the userto write its current salary."
+        },
+        "Notice-period": {
+            "question": "Ask to the user to write its notice period in its current company."
+        },
+        "Resume": {
+            "question": "Ask to the user to give the resume ."
+        },
+        "Email": {
+            "question": "Ask to the user to write the email address ."
+        },
+        "Invite": {
+            "question": "Generate a new invitation on Google Meet and send it to the user."
+        },
+        "Feedback": {
+            "question": "Thanks for your response"
+        }
+    },
+    "states": {
+        "S0": {
+            "current_id": "S0",
+            "name": "start",
+            "check_file": "String",
+            "conditions": {
+                "Name": "null",
+                "JOB-ID": "null",
+                "Current-Salary": "null",
+                "Expected-Salary": "null",
+                "Notice-period": "null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S1",
+                    "user_pref": "Name"
+                }
+            ]
+        },
+        "S1": {
+            "current_id": "S1",
+            "name": "S1_Name",
+            "check_file": "numberic digits",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "null",
+                "Current-Salary": "null",
+                "Expected-Salary": "null",
+                "Notice-period": "null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S2",
+                    "user_pref": "JOB-ID"
+                }
+            ]
+        },
+        "S2": {
+            "current_id": "S2",
+            "name": "S2_Name_and_Job_id",
+            "check_file": "numberic digits",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "null",
+                "Expected-Salary": "null",
+                "Notice-period": "null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S3",     
+                    "user_pref": "Current-Salary"
+                }
+            ]
+        },
+        "S3": {
+            "current_id": "S3",
+            "name": "S3_Name_and_Job_id_and_current_salary",
+            "check_file": "numberic digits",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "null",
+                "Notice-period": "null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S4",
+                    "user_pref": "Expected-Salary"
+                }
+            ]
+        },
+        "S4": {
+            "current_id": "S4",
+            "name": "S4_Name_and_Job_id_and_current_salary_and_expected_salary",
+            "check_file": "numberic digits",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "not-null",
+                "Notice-period": "null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"  
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S5",
+                    "user_pref": "Notice-period"
+                }
+            ]
+        },
+        "S5": {
+            "current_id": "S5",
+            "name": "S5_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period",
+            "check_file": "file",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "not-null",
+                "Notice-period": "not-null",
+                "Resume": "null",
+                "Email": "null",
+                "Invite": "null"   
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S6",
+                    "user_pref": "Resume"
+                }
+            ]
+        },
+        "S6": {
+            "current_id": "S6",
+            "name": "S6_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume",
+            "check_file": "email format",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "not-null",
+                "Notice-period": "not-null",
+                "Resume": "not-null",
+                "Email": "null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S7",
+                    "user_pref": "Email"
+                }
+            ]
+        },
+        "S7": {
+            "current_id": "S7",
+            "name": "S7_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume_and_email",
+            "check_file": "String",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "not-null",
+                "Notice-period": "not-null",
+                "Resume": "not-null",
+                "Email": "not-null",
+                "Invite": "null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S8",
+                    "user_pref": "Invite"
+                }
+            ]
+        },
+        "S8": {
+            "current_id": "S8",
+            "name": "S8_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume_and_email_and_invite",
+            "check_file": "String",
+            "conditions": {
+                "Name": "not-null",
+                "JOB-ID": "not-null",
+                "Current-Salary": "not-null",
+                "Expected-Salary": "not-null",
+                "Notice-period": "not-null",
+                "Resume": "not-null",
+                "Email": "not-null",
+                "Invite": "not-null"
+            },
+            "outgoing": [
+                {
+                    "outgoing_id": "S0",
+                    "user_pref" : "Feedback"
+                }
+            ]
+        }
+    }
+}
