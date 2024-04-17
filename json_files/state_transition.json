@@ -27,7 +27,7 @@
     },
     "states": {
         "S0": {
-            "current_id": "S0",
+            "id": "S0",
             "name": "start",
             "check_file": "String",
             "conditions": {
@@ -42,13 +42,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S1",
-                    "user_pref": "Name"
+                    "id": "S1",
+                    "user_pref": "Name",
+                    "prompt": "name_template"
                 }
             ]
         },
         "S1": {
-            "current_id": "S1",
+            "id": "S1",
             "name": "S1_Name",
             "check_file": "numberic digits",
             "conditions": {
@@ -63,13 +64,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S2",
-                    "user_pref": "JOB-ID"
+                    "id": "S2",
+                    "user_pref": "JOB-ID",
+                    "prompt": "job_template"
                 }
             ]
         },
         "S2": {
-            "current_id": "S2",
+            "id": "S2",
             "name": "S2_Name_and_Job_id",
             "check_file": "numberic digits",
             "conditions": {
@@ -84,13 +86,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S3",     
-                    "user_pref": "Current-Salary"
+                    "id": "S3",     
+                    "user_pref": "Current-Salary",
+                    "prompt": "current_salary_template"
                 }
             ]
         },
         "S3": {
-            "current_id": "S3",
+            "id": "S3",
             "name": "S3_Name_and_Job_id_and_current_salary",
             "check_file": "numberic digits",
             "conditions": {
@@ -105,13 +108,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S4",
-                    "user_pref": "Expected-Salary"
+                    "id": "S4",
+                    "user_pref": "Expected-Salary",
+                    "prompt": "expected_salary_template"
                 }
             ]
         },
         "S4": {
-            "current_id": "S4",
+            "id": "S4",
             "name": "S4_Name_and_Job_id_and_current_salary_and_expected_salary",
             "check_file": "numberic digits",
             "conditions": {
@@ -126,13 +130,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S5",
-                    "user_pref": "Notice-period"
+                    "id": "S5",
+                    "user_pref": "Notice-period",
+                    "prompt": "notice_period_salary"
                 }
             ]
         },
         "S5": {
-            "current_id": "S5",
+            "id": "S5",
             "name": "S5_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period",
             "check_file": "file",
             "conditions": {
@@ -147,13 +152,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S6",
-                    "user_pref": "Resume"
+                    "id": "S6",
+                    "user_pref": "Resume",
+                    "prompt": "resume_template"
                 }
             ]
         },
         "S6": {
-            "current_id": "S6",
+            "id": "S6",
             "name": "S6_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume",
             "check_file": "email format",
             "conditions": {
@@ -168,13 +174,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S7",
-                    "user_pref": "Email"
+                    "id": "S7",
+                    "user_pref": "Email",
+                    "prompt": "email_template"
                 }
             ]
         },
         "S7": {
-            "current_id": "S7",
+            "id": "S7",
             "name": "S7_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume_and_email",
             "check_file": "String",
             "conditions": {
@@ -189,13 +196,14 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S8",
-                    "user_pref": "Invite"
+                    "id": "S8",
+                    "user_pref": "Invite",
+                    "prompt": "invite_template"
                 }
             ]
         },
         "S8": {
-            "current_id": "S8",
+            "id": "S8",
             "name": "S8_Name_and_Job_id_and_current_salary_and_expected_salary_and_notice_period_and_resume_and_email_and_invite",
             "check_file": "String",
             "conditions": {
@@ -210,8 +218,9 @@
             },
             "outgoing": [
                 {
-                    "outgoing_id": "S0",
-                    "user_pref" : "Feedback"
+                    "id": "S0",
+                    "user_pref" : "Feedback",
+                    "prompt": "feedback_template"
                 }
             ]
         }
