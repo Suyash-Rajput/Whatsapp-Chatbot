@@ -1,6 +1,7 @@
 import os
 import gemini
 import requests
+import prompts as pt
 from pathlib import Path
 from flask import Flask, request, session
 from api_whatsapp import API_Whatsapp
@@ -53,7 +54,7 @@ def wa_reply():
     gcp.insert_data(rows_to_insert, table_id, dataset_id)
     session_started_time = session.get('time_started', None)
 
-    final_prompt = the_final_prompt(session[__question])
+    final_prompt = pt.the_final_prompt(session[__question], session['__user_pref'])
     print("final _prompt: " + final_prompt)
     generate_ans = gemini.get_gemini_response(final_prompt)
 
