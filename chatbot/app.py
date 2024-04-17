@@ -91,8 +91,8 @@ def wa_reply():
         print("final _prompt: " + final_prompt)
         generate_ans = gemini.get_gemini_response(final_prompt)
 
-    wa_api.from_phone = request.form.get('To')
-    wa_api.to_phone = recipient_number
+    wa_api.from_phone =  recipient_number
+    wa_api.to_phone = request.form.get('To')
 
     if query.strip().lower() == "reset":
         session.clear()  # Reset session data
