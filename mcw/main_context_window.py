@@ -69,10 +69,12 @@ def set_target_state(session):
 
 def update_context(session, query):
     session_started_time = session.get('time_started', None)
+    check_status =  pt.check_template(query, session["__check_file"])
+    if check_status.strip().lower() == "no":
+        return 
     time_diff = 12
     if session_started_time is not None:
-        time_diff = utils.print_time_taken(session['time_started'], datetime.now())
-        
+        time_diff = utils.print_time_taken(session['time_started'], datetime.now())        
     if 'To' in session and session['To'] == recipient_number and time_diff < 10:
         if len(session) == 0:
            fill_initial_state(session)

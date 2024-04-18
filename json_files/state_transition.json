@@ -4,10 +4,10 @@
             "question" : "Ask the user to write its name."
         },
         "JOB-ID": {
-            "question": "Ask the user to choose the preferred job ID from the given list of job IDs."
+            "question": "Ask the user to choose the job ID from the given list of job IDs ."
         },
         "Current-Salary": {
-            "question": "Ask to the userto write its current salary."
+            "question": "Ask to the user to write its current salary."
         },
         "Notice-period": {
             "question": "Ask to the user to write its notice period in its current company."
@@ -44,7 +44,7 @@
                 {
                     "id": "S1",
                     "user_pref": "Name",
-                    "prompt": "name_template"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -88,7 +88,7 @@
                 {
                     "id": "S3",     
                     "user_pref": "Current-Salary",
-                    "prompt": "current_salary_template"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -110,7 +110,7 @@
                 {
                     "id": "S4",
                     "user_pref": "Expected-Salary",
-                    "prompt": "expected_salary_template"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -132,7 +132,7 @@
                 {
                     "id": "S5",
                     "user_pref": "Notice-period",
-                    "prompt": "notice_period_salary"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -154,7 +154,7 @@
                 {
                     "id": "S6",
                     "user_pref": "Resume",
-                    "prompt": "resume_template"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -176,7 +176,7 @@
                 {
                     "id": "S7",
                     "user_pref": "Email",
-                    "prompt": "email_template"
+                    "prompt": "default_template"
                 }
             ]
         },
@@ -198,7 +198,7 @@
                 {
                     "id": "S8",
                     "user_pref": "Invite",
-                    "prompt": "invite_template"
+                    "prompt": "default_template"
                 }
             ]
         },
