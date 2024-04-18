@@ -57,7 +57,6 @@ def wa_reply():
     final_prompt = pt.the_final_prompt(session[__question], session['__user_pref'])
     print("final _prompt: " + final_prompt)
     generate_ans = gemini.get_gemini_response(final_prompt)
-
     wa_api.from_phone =  recipient_number
     wa_api.to_phone = request.form.get('To')
 
