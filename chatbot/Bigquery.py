@@ -32,12 +32,13 @@ class  GCP_big_query():
     def create_table(self, table_id, dataset_id):
         dataset_ref = self.client.dataset(dataset_id)
         table_ref = dataset_ref.table(table_id)
-        table =  bigquery.Table(table_ref, schema = self.schema)
         try:
-            self.client.create_table(table)
-            print(f"Table '{table_id}' created successfully.")
+           client.get_table(table_ref)
+           print(f"Table '{table_id}' already exists.")
         except Exception as e:
-            print(f"Table '{table_id}' already exists.")
+            table = bigquery.Table(table_ref, schema=schema)
+            client.create_table(table)
+            print(f"Table '{table_id}' created successfully.")
     
     
     def insert_data(self, rows_to_insert, table_id, dataset_id):
@@ -50,12 +51,19 @@ class  GCP_big_query():
             print("Encountered errors while inserting data into BigQuery table:", inserted)
 
 
-    def retrieve(self, table_id, dataset_id):
+    def retrieve(self, table_id, dataset_id, company_name):
         sql_query = f"SELECT * FROM `{dataset_id}.{table_id}`"
+        sql_query = f"""
+            SELECT *
+            FROM `autotask-loreal-dv.{dataset_id}.{table_id}`
+            WHERE company_name = {company_name}
+            """
         query_job = self.client.query(sql_query)
         print("Retrieved data:")
+        rows = []
         for row in query_job:
-            print(row)
+            rows.append(row)
+        return rows
 
 
     def delete_dataset(self, dataset_id):

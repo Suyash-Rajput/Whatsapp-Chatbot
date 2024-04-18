@@ -43,7 +43,7 @@ def wa_reply():
     print("User query: %s" % query)
     if query.startswith('http://') or query.startswith('https://'):
        user_query = fetch_file_from_url(query)
-       
+      
     mcw.update_context(session, user_query)
     gcp.create_dataset(dataset_id)
     gcp.create_table(table_id, dataset_id)   
