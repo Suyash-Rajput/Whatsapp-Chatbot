@@ -33,11 +33,11 @@ class  GCP_big_query():
         dataset_ref = self.client.dataset(dataset_id)
         table_ref = dataset_ref.table(table_id)
         try:
-           client.get_table(table_ref)
+           self.client.get_table(table_ref)
            print(f"Table '{table_id}' already exists.")
         except Exception as e:
-            table = bigquery.Table(table_ref, schema=schema)
-            client.create_table(table)
+            table = bigquery.Table(table_ref, schema=self.schema)
+            self.client.create_table(table)
             print(f"Table '{table_id}' created successfully.")
     
     
@@ -55,8 +55,8 @@ class  GCP_big_query():
         sql_query = f"SELECT * FROM `{dataset_id}.{table_id}`"
         sql_query = f"""
             SELECT *
-            FROM `autotask-loreal-dv.{dataset_id}.{table_id}`
-            WHERE company_name = {company_name}
+            FROM `{dataset_id}.{table_id}`
+            WHERE company_name = "{company_name}"
             """
         query_job = self.client.query(sql_query)
         print("Retrieved data:")

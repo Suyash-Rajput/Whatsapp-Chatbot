@@ -1,28 +1,29 @@
-from Bigquery import GCP_big_query
+from .Bigquery import GCP_big_query
 
-gcp = GCP_big_query()
+# 
 company_name = "LOréal"
 dataset_id = "Chatbot_messages_dataset"
-table_id = "Jobs_Id"
+table_id = "Jobs_data"
 
 
 def the_final_prompt(message, prompt_function):
     if  prompt_function == "job_template":
-        job_template(message)
+        print("In job template")
+        return job_template(message)
     else:
         return default(message)
 
 
-def check_template(user_query, check_format):
+def check_template(user_query, check_format, question):
     s1 = f" USER_QUERY : {user_query} \n"
-    s1 = f" FILE_FORMAT : {check_format} \n "
-    s1 += "Check in the  given USER_QUERY whether the given FILE_FORMAT is present or not . \n"
+    s1 += f" Question : {question} \n "
+    s1 += "Check the  given USER_QUERY, whether it can be able to give answer the above given Question. \n"
     s1 +=  "Answer it only in yes or no .\n" 
     return s1
-    
-    
+     
 def job_template(message):
-    rows = retrieve(table_id, dataset_id, company_name)
+    gcp = GCP_big_query()
+    rows = gcp.retrieve(table_id, dataset_id, company_name)
     s1 = "Act as experienced recruiter .\n"
     for row_tuple in rows:
         prompt = ' Company name'   
@@ -48,6 +49,7 @@ def job_template(message):
 def default(message):
     s1 = "Act as experienced recruiter .\n"
     s1 += f"Message: {message} \n"
-    s1 += "Based on the Message given to you, create a new question which is in proper formet.\n"
-    s1 + " Modify the Message in a best way as a recruiter \n"
+    s1 += "Based on the Message given to you, create a Question .\n"
+    s1 + " create a Question in a best way such that it is asked in chatbot . \n"
+    s1 += " There should be any tags other than question . \n"
     return s1
