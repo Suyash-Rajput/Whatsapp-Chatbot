@@ -9,6 +9,9 @@
         "Current-Salary": {
             "question": "Ask to the user to write its current salary."
         },
+        "Expected-Salary": {
+            "question": "Ask to the user to write its expected salary."
+        },
         "Notice-period": {
             "question": "Ask to the user to write its notice period in its current company."
         },
