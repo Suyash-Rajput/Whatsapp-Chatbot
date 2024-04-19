@@ -1,7 +1,7 @@
 from .Bigquery import GCP_big_query
 
 # 
-company_name = "LOréal"
+company_name = "Mars Consulting"
 dataset_id = "Chatbot_messages_dataset"
 table_id = "Jobs_data"
 
@@ -14,11 +14,11 @@ def the_final_prompt(message, prompt_function):
         return default(message)
 
 
-def check_template(user_query, check_format, question):
-    s1 = f" USER_QUERY : {user_query} \n"
-    s1 += f" Question : {question} \n "
-    s1 += "Check the  given USER_QUERY, whether it can be able to give answer the above given Question. \n"
-    s1 +=  "Answer it only in yes or no .\n" 
+def check_template(user_query, question):
+    s1 = f"User Query: {user_query}\n"
+    s1 += f"Question: {question}\n"
+    s1 += "Please evaluate the given user query to determine if it can effectively answer the provided question.\n"
+    s1 += "Respond with 'yes' if the query is suitable for answering the question, otherwise respond with 'no'.\n"
     return s1
      
 def job_template(message):
