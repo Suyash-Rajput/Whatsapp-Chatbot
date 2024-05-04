@@ -92,26 +92,3 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-
-# message_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-# if session.get('__state') == 'S8':
-#     response_text = session.pop('__question')
-# elif query.strip().lower() == "reset":
-#     session.clear()  # Reset session data
-#     response_text = "Session reset successfully."
-# else:
-#     response_text = generate_ans[:1600] if len(generate_ans) > 1600 else generate_ans
-
-# response = wa_api.message_2(response_text)
-
-# rows_to_insert = [{
-#     "message_sender": recipient_number if session.get('__state') == 'S8' else request.form.get('To'),
-#     "message_receiver": request.form.get('To') if session.get('__state') == 'S8' else recipient_number,
-#     "message_time": message_time,
-#     "message_text": str(response.body)
-# }]
-
-# gcp.insert_data(rows_to_insert, table_id, dataset_id)
-
-# return str(response.body)
